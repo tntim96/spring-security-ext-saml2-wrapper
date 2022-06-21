@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.springframework.security.extensions</groupId>
+  <groupId>ourcommunity.springframework.security.extensions</groupId>
   <artifactId>spring-security-saml2-core-shaded</artifactId>
   <version>1.0.3.0</version>
 
@@ -44,12 +44,14 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <artifactSet>
-                <excludes>
-                  <exclude>META-INF/BCKEY.SF</exclude>
-                  <exclude>META-INF/BCKEY.DSA</exclude>
-                </excludes>
-              </artifactSet>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                  <resource>.SF</resource>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                  <resource>.DSA</resource>
+                </transformer>
+              </transformers>
               <relocations>
                 <relocation>
                   <pattern>org.opensaml</pattern>
